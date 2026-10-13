@@ -16,7 +16,12 @@ try {
 // Konfiguration
 // ---------------------------------------------------------------------------
 // Hemligheten läses ur miljön – med ett standardvärde så att det funkar utan .env /byrån
-const JWT_SECRET = process.env.JWT_SECRET || 'padel'
+const JWT_SECRET = process.env.JWT_SECRET
+
+if (!JWT_SECRET) {
+  console.error('JWT_SECRET saknas. Ange en hemlighet i miljön.')
+  process.exit(1)
+}
 const TOKEN_TTL = process.env.TOKEN_TTL || '30m'
 const PORT = Number(process.env.PORT || 4000)
 
@@ -123,7 +128,7 @@ app.get('/api/user', requireLogin, (req, res) => res.json(publicMember(req.membe
 
 // Bokningar för en medlem. memberNo i adressen gör att receptionen kan slå upp andra sen.
 app.get('/api/bookings', requireLogin, (req, res) => {
-  const memberNo = req.query.memberNo || req.member.memberNo
+  const memberNo = req.member.memberNo
   res.json(bookingsByMember[memberNo] || [])
 })
 
