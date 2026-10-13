@@ -1,7 +1,13 @@
 <template>
   <div>
     <h1>{{ greeting }}</h1>
-    <img src="../assets/hero-optimized.jpg" class="hero" alt="" loading="lazy">
+    <img
+    src="../assets/hero-optimized.jpg"
+    class="hero"
+    alt=""
+    width="1600"
+    height="800"
+    >
 
     <div class="grid">
       <div class="card">
