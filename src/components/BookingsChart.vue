@@ -4,7 +4,22 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import Chart from 'chart.js/auto'
+
+import {
+  Chart,
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
+
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale
+)
+
 
 const props = defineProps({
   months: { type: Array, required: true },
